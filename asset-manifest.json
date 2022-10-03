@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/graph-algorithms/static/css/main.ec5d081b.css",
+    "main.js": "/graph-algorithms/static/js/main.76744dc7.js",
+    "static/js/787.2600aaf9.chunk.js": "/graph-algorithms/static/js/787.2600aaf9.chunk.js",
+    "index.html": "/graph-algorithms/index.html",
+    "main.ec5d081b.css.map": "/graph-algorithms/static/css/main.ec5d081b.css.map",
+    "main.76744dc7.js.map": "/graph-algorithms/static/js/main.76744dc7.js.map",
+    "787.2600aaf9.chunk.js.map": "/graph-algorithms/static/js/787.2600aaf9.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ec5d081b.css",
+    "static/js/main.76744dc7.js"
+  ]
+}
