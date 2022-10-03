@@ -7,6 +7,7 @@ export default function useData() {
   const [delay, setDelay] = useState(1);
   const [algorithm, setAlgorithm] = useState("kruskal");
   const [startPrim, setStartPrim] = useState(0);
+  const [onShow, setOnShow] = useState(false);
 
   function EmptyMatrix(size) {
     const newMatrix = [];
@@ -73,6 +74,7 @@ export default function useData() {
   }
 
   async function KruskalsAlgorithm() {
+    setOnShow(true);
     Reset();
     function changeKruskal(a, b) {
       for (let vertex of vertices) {
@@ -100,9 +102,11 @@ export default function useData() {
       Show();
       await pause();
     }
+    setOnShow(false);
   }
 
   async function PrimsAlgorithm() {
+    setOnShow(true);
     Reset();
     const { vertices, edges } = graph;
     const start = vertices[startPrim];
@@ -128,6 +132,7 @@ export default function useData() {
       Show();
       await pause();
     }
+    setOnShow(false);
   }
 
   useEffect(() => {
@@ -199,5 +204,7 @@ export default function useData() {
     PrimsAlgorithm,
     startPrim,
     setStartPrim,
+    onShow,
+    setOnShow,
   };
 }

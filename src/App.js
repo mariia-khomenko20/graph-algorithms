@@ -35,6 +35,8 @@ function App() {
     PrimsAlgorithm,
     startPrim,
     setStartPrim,
+    onShow,
+    setOnShow,
   } = useData();
 
   useEffect(() => {
@@ -60,7 +62,7 @@ function App() {
           <button
             className="flex flex-row items-center justify-center bg-transparent hover:bg-black hover:bg-opacity-10"
             onClick={() => {
-              setOnMenu(onMenu ? false : true);
+              if (!onShow) setOnMenu(onMenu ? false : true);
             }}
           >
             {!onMenu ? <IoMdMenu /> : <IoMdArrowBack />}
