@@ -6,7 +6,7 @@ export default function RadioGroup({
   return (
     <fieldset>
       {data.map((radio, index) => (
-        <div className="flex flex-row space-x-1">
+        <div className="flex flex-row items-center space-x-1">
           <input
             type="radio"
             value={radio.value}

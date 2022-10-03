@@ -41,12 +41,16 @@ function App() {
     setMatrix(RandomMatrix(verticesAmount));
   }, []);
 
-  const MenuRow = ({ children }) => {
-    return <div className="flex flex-row space-x-3">{children}</div>;
+  const MenuRow = ({ children, ...props }) => {
+    return (
+      <div className="flex flex-col space-y-2" {...props}>
+        {children}
+      </div>
+    );
   };
 
   const Label = ({ children }) => {
-    return <label className="">{children}</label>;
+    return <label className="font-medium text-gray-500">{children}</label>;
   };
 
   return (
@@ -65,45 +69,56 @@ function App() {
         <span className="text-2xl font-bold">GraphAlgorithms</span>
       </header>
       <main className="flex flex-row w-full h-full">
-        <div className="flex w-full h-full p-4">
+        <div className="flex w-full h-full p-6">
           <GraphContainer graph={graph} setGraph={setGraph} />
         </div>
         <RetractableMenu onMenu={onMenu}>
           <div className="flex flex-col space-y-10">
-            <div className="flex flex-col space-y-3">
-              <label>Vertices amount</label>
+            <MenuRow>
+              <Label>Vertices amount</Label>
               <NumberUpDown
                 value={verticesAmount}
                 min={3}
                 max={7}
                 setValue={setVerticesAmount}
               />
-            </div>
-            <div className="flex flex-col space-y-3">
-              <label>Adjacency matrix</label>
-              <div className="flex flex-row space-x-10">
-                <Button onClick={() => setMatrix(EmptyMatrix(verticesAmount))}>
-                  <AiFillDelete className="text-xl" />
-                  <span>Clear</span>
-                </Button>
-                <Button onClick={() => setMatrix(RandomMatrix(verticesAmount))}>
-                  <FaRandom className="text-xl" />
-                  <span>Random</span>
-                </Button>
+            </MenuRow>
+            <MenuRow>
+              <div className="flex flex-row items-center justify-between">
+                <Label>Adjacency matrix</Label>
+                <div className="flex flex-row space-x-5">
+                  <Button
+                    size="sm"
+                    onClick={() => setMatrix(EmptyMatrix(verticesAmount))}
+                  >
+                    <AiFillDelete className="text-md" />
+                    <span>Clear</span>
+                  </Button>
+                  <Button
+                    size="sm"
+                    onClick={() => setMatrix(RandomMatrix(verticesAmount))}
+                  >
+                    <FaRandom className="text-md" />
+                    <span>Random</span>
+                  </Button>
+                </div>
               </div>
+            </MenuRow>
+            <MenuRow>
               <AdjacencyMatrix
                 vertices={graph.vertices}
                 data={matrix}
                 updateData={setMatrix}
               />
-            </div>
+            </MenuRow>
+
             <div className="flex flex-row justify-center">
               <Button
                 onClick={() => {
                   setOnModalWindow(onModalWindow ? false : true);
                 }}
               >
-                <BsFillPlayFill />
+                <BsFillPlayFill className="text-xl" />
                 <span>Algorithms</span>
               </Button>
             </div>
@@ -114,27 +129,27 @@ function App() {
         onModalWindow={onModalWindow}
         setOnModalWindow={setOnModalWindow}
       >
-        <div className="flex flex-col space-y-5">
-          <div className="flex flex-col space-y-2">
-            <label>Timeout</label>
+        <div className="flex flex-col space-y-5 w-64">
+          <MenuRow>
+            <Label>Timeout</Label>
             <div className="flex flex-row space-x-2 items-center">
               <NumberUpDown value={delay} min={1} max={5} setValue={setDelay} />
               <span>sec.</span>
             </div>
-          </div>
-          <div className="flex flex-col space-y-2">
-            <label>Algorithm</label>
+          </MenuRow>
+          <MenuRow>
+            <Label>Algorithm</Label>
             <RadioGroup
               data={[
-                { value: "kruskal", label: "Kruskal's algorithm" },
-                { value: "prim", label: "Prim's algorithm" },
+                { value: "kruskal", label: "Kruskal's" },
+                { value: "prim", label: "Prim's" },
               ]}
               target={algorithm}
               setTarget={setAlgorithm}
             />
-          </div>
-          <div className="flex flex-col space-y-2">
-            <label>Start vertex (for Prim)</label>
+          </MenuRow>
+          <MenuRow style={{ opacity: algorithm === "prim" ? 1 : 0 }}>
+            <Label>Start vertex</Label>
             <Dropdown
               data={graph.vertices}
               target={startPrim}
@@ -143,8 +158,8 @@ function App() {
                 setStartPrim(value);
               }}
             />
-          </div>
-          <div className="flex flex-row justify-center">
+          </MenuRow>
+          <MenuRow>
             <Button
               onClick={() => {
                 setOnMenu(false);
@@ -161,7 +176,7 @@ function App() {
             >
               Start
             </Button>
-          </div>
+          </MenuRow>
         </div>
       </ModalWindow>
     </div>

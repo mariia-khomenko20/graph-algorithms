@@ -7,6 +7,8 @@
 
 :root {
   --header-height: 70px;
+  --primary-color: #100227;
+  --secondary-color: #00b495;
 }
 
 header {
@@ -69,3 +71,27 @@ main {
   opacity: 0;
 }
 /* ModalWindow Transition END*/
+
+input[type="number"] {
+  line-height: 40px;
+}
+
+input[type="number"]::-webkit-inner-spin-button {
+  width: 40px;
+  height: 40px;
+}
+
+::-webkit-scrollbar {
+  width: 14px;
+  height: 14px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(240, 240, 240);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--secondary-color);
+  border-radius: 6px;
+  border: 3px solid rgb(240, 240, 240);
+}

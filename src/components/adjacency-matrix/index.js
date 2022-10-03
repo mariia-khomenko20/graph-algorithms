@@ -6,7 +6,10 @@ export default function AdjacencyMatrix({
   updateData = () => {},
 }) {
   return (
-    <table className="w-full border-separate border-spacing-1">
+    <table
+      className="w-full border-separate border-spacing-1"
+      style={{ height: "230px" }}
+    >
       <thead>
         <tr>
           <th />
@@ -23,8 +26,8 @@ export default function AdjacencyMatrix({
               <td key={j}>
                 <input
                   className={classNames("flex w-full text-center", {
-                    "bg-transparent select-none focus:outline-none": j <= i,
-                    "bg-white rounded-md outline outline-dark outline-1 focus:outline-2":
+                    "bg-transparent outline-none focus:outline-none": j <= i,
+                    "bg-white rounded-md outline outline-secondary-dark outline-2 focus:shadow-md focus:shadow-secondary-default":
                       j > i,
                   })}
                   value={weight}
