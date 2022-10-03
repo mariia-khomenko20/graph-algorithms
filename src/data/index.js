@@ -114,7 +114,7 @@ export default function useData() {
     start.prim = true;
     Show();
     await pause();
-    for (let index = 0; index < vertices.length; index++) {
+    for (let index = 0; index < vertices.length - 1; index++) {
       let min = null;
       for (let edge of edges) {
         const { a, b, weight } = edge;
