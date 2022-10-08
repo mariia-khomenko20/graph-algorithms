@@ -6,79 +6,7 @@
 }
 
 :root {
-  --header-height: 70px;
-  --primary-color: #100227;
-  --secondary-color: #00b495;
-}
-
-header {
-  width: 100%;
-  height: var(--header-height);
-}
-
-header button {
-  width: var(--header-height);
-  height: var(--header-height);
-  font-size: 32px;
-}
-
-main {
-  width: 100%;
-  height: calc(100% - var(--header-height));
-}
-
-/* RetractableMenu Transition START*/
-.retractable-menu {
-  width: 440px;
-  height: calc(100% - var(--header-height));
-}
-
-.retractable-menu-enter {
-  left: -100%;
-}
-
-.retractable-menu-enter-active {
-  transition: all 500ms linear 0ms;
-  left: 0;
-}
-
-.retractable-menu-exit {
-  left: 0;
-}
-
-.retractable-menu-exit-active {
-  transition: all 500ms linear 0ms;
-  left: -100%;
-}
-/* RetractableMenu Transition END*/
-
-/* ModalWindow Transition START*/
-.modal-window-enter {
-  opacity: 0;
-}
-
-.modal-window-enter-active {
-  transition: all 300ms linear 0ms;
-  opacity: 100%;
-}
-
-.modal-window-exit {
-  opacity: 100%;
-}
-
-.modal-window-exit-active {
-  transition: all 300ms linear 0ms;
-  opacity: 0;
-}
-/* ModalWindow Transition END*/
-
-input[type="number"] {
-  line-height: 40px;
-}
-
-input[type="number"]::-webkit-inner-spin-button {
-  width: 40px;
-  height: 40px;
+  --primary-color: #33008a;
 }
 
 ::-webkit-scrollbar {
@@ -91,7 +19,48 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: var(--secondary-color);
+  background-color: var(--primary-color);
   border-radius: 6px;
   border: 3px solid rgb(240, 240, 240);
+}
+
+/* OverlayMenu animation START */
+.overlay-menu-enter {
+  left: -100%;
+}
+.overlay-menu-enter-active {
+  left: 0;
+  transition: left 300ms;
+}
+.overlay-menu-exit {
+  left: 0;
+}
+.overlay-menu-exit-active {
+  left: -100%;
+  transition: left 300ms;
+}
+/* OverlayMenu animation END */
+
+/* ModalWindow animation START */
+.modal-window-enter {
+  opacity: 0;
+}
+
+.modal-window-enter-active {
+  opacity: 100%;
+  transition: opacity 300ms;
+}
+
+.modal-window-exit {
+  opacity: 100%;
+}
+
+.modal-window-exit-active {
+  opacity: 0;
+  transition: opacity 300ms;
+}
+/* ModalWindow animation END */
+
+input[type="number"]::-webkit-inner-spin-button {
+  height: 40px;
 }

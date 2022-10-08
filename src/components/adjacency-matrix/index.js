@@ -3,46 +3,41 @@ import classNames from "classnames";
 export default function AdjacencyMatrix({
   vertices = [],
   data = {},
-  updateData = () => {},
+  setData = () => {},
 }) {
   return (
-    <table
-      className="w-full border-separate border-spacing-1"
-      style={{ height: "230px" }}
-    >
+    <table className="border-separate border-spacing-2">
       <thead>
         <tr>
           <th />
           {vertices.map((vertex, index) => (
-            <th key={index}>{vertex.name ? vertex.name : index}</th>
+            <th key={`vertices[${index}]`}>
+              {vertex.name ? vertex.name : index}
+            </th>
           ))}
         </tr>
       </thead>
       <tbody>
         {data.map((row, i) => (
-          <tr key={i}>
+          <tr key={`matrix[${i}]`}>
             <th>{vertices[i] ? vertices[i].name : i}</th>
             {row.map((weight, j) => (
-              <td key={j}>
+              <td key={`matrix[${i}][${j}]`}>
                 <input
-                  className={classNames("flex w-full text-center", {
-                    "bg-transparent outline-none focus:outline-none": j <= i,
-                    "bg-white rounded-md outline outline-secondary-dark outline-2 focus:shadow-md focus:shadow-secondary-default":
-                      j > i,
+                  className={classNames("h-8 w-full text-center rounded-md", {
+                    "bg-transparent outline-none": j <= i,
+                    "rounded-md text-gray-600 outline outline-1 focus:outline-2 focus:outline-primary-default":
+                      i < j,
                   })}
                   value={weight}
-                  minLength={1}
-                  maxLength={2}
                   readOnly={j <= i}
+                  minLength="1"
+                  maxLength="2"
                   onInput={(e) => {
-                    const regex = /[0-9]|\./;
-                    const value = e.target.value ? e.target.value : 0;
-                    if (!regex.test(value)) e.preventDefault();
-                    else {
-                      const newMatrix = data.slice();
-                      newMatrix[i][j] = newMatrix[j][i] = parseInt(value);
-                      updateData(newMatrix);
-                    }
+                    const newData = data.slice();
+                    const value = parseInt(e.target.value);
+                    newData[i][j] = newData[j][i] = value ? value : 0;
+                    setData(newData);
                   }}
                 />
               </td>

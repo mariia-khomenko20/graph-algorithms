@@ -62,11 +62,17 @@ export default function useData() {
     setGraph({ vertices, edges });
   }
 
-  function Reset() {
-    const { vertices, edges } = graph;
-    for (let vertex of vertices) {
+  function ResetVertices(vertices) {
+    const result = vertices.slice();
+    for (let vertex of result) {
       vertex.color = vertex.prim = vertex.kruskal = null;
     }
+    return result;
+  }
+
+  function Reset() {
+    const { edges } = graph;
+    const vertices = ResetVertices(graph.vertices);
     for (let edge of edges) {
       edge.color = null;
     }
@@ -161,7 +167,7 @@ export default function useData() {
   }, [verticesAmount]);
 
   useEffect(() => {
-    const { vertices } = graph;
+    const vertices = ResetVertices(graph.vertices);
     if (vertices.length < matrix.length) {
       const names = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
       while (vertices.length < matrix.length) {

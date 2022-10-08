@@ -2,10 +2,10 @@ import "./styles/App.css";
 import { BsFillPlayFill, BsGearFill, BsMenuApp } from "react-icons/bs";
 import { FaRandom } from "react-icons/fa";
 import { AiFillDelete } from "react-icons/ai";
-import { IoMdArrowBack, IoMdMenu } from "react-icons/io";
+import { IoArrowBack, IoMenu } from "react-icons/io5";
 import Button from "./components/button";
 import { useEffect, useState } from "react";
-import RetractableMenu from "./components/retractable-menu";
+import OverlayMenu from "./components/overlay-menu";
 import ModalWindow from "./components/modal-window";
 import GraphContainer from "./components/graph";
 import useData from "./data";
@@ -57,25 +57,23 @@ function App() {
 
   return (
     <div className="flex flex-col w-full h-screen bg-slate-100">
-      <header className="flex flex-row items-center space-x-2 bg-primary-default text-secondary-default">
-        <div className="flex flex-row items-center">
-          <button
-            className="flex flex-row items-center justify-center bg-transparent hover:bg-black hover:bg-opacity-10"
-            onClick={() => {
-              if (!onShow) setOnMenu(onMenu ? false : true);
-            }}
-          >
-            {!onMenu ? <IoMdMenu /> : <IoMdArrowBack />}
-          </button>
-        </div>
-        <span className="text-2xl font-bold">GraphAlgorithms</span>
+      <header className="flex flex-row items-center px-3 py-3 space-x-2">
+        <button
+          className="flex items-center justify-center w-11 h-11 rounded-full text-3xl text-primary-default bg-transparent hover:bg-black hover:bg-opacity-5 focus:outline-none"
+          onClick={() => {
+            setOnMenu(onMenu ? false : true);
+          }}
+        >
+          {onMenu ? <IoArrowBack /> : <IoMenu />}
+        </button>
+        <span className="text-2xl font-medium text-primary-default">
+          GraphAlgorithms
+        </span>
       </header>
-      <main className="flex flex-row w-full h-full">
-        <div className="flex w-full h-full p-6">
-          <GraphContainer graph={graph} setGraph={setGraph} />
-        </div>
-        <RetractableMenu onMenu={onMenu}>
-          <div className="flex flex-col space-y-10">
+      <main className="relative flex flex-1 flex-row">
+        <GraphContainer graph={graph} setGraph={setGraph} />
+        <OverlayMenu inProp={onMenu}>
+          <div className="flex flex-col space-y-9">
             <MenuRow>
               <Label>Vertices amount</Label>
               <NumberUpDown
@@ -110,10 +108,9 @@ function App() {
               <AdjacencyMatrix
                 vertices={graph.vertices}
                 data={matrix}
-                updateData={setMatrix}
+                setData={setMatrix}
               />
             </MenuRow>
-
             <div className="flex flex-row justify-center">
               <Button
                 onClick={() => {
@@ -125,16 +122,13 @@ function App() {
               </Button>
             </div>
           </div>
-        </RetractableMenu>
+        </OverlayMenu>
       </main>
-      <ModalWindow
-        onModalWindow={onModalWindow}
-        setOnModalWindow={setOnModalWindow}
-      >
+      <ModalWindow inProp={onModalWindow} setInProp={setOnModalWindow}>
         <div className="flex flex-col space-y-5 w-64">
           <MenuRow>
             <Label>Timeout</Label>
-            <div className="flex flex-row space-x-2 items-center">
+            <div className="flex flex-row space-x-3 items-center">
               <NumberUpDown value={delay} min={1} max={5} setValue={setDelay} />
               <span>sec.</span>
             </div>
@@ -150,7 +144,7 @@ function App() {
               setTarget={setAlgorithm}
             />
           </MenuRow>
-          <MenuRow style={{ opacity: algorithm === "prim" ? 1 : 0 }}>
+          <MenuRow>
             <Label>Start vertex</Label>
             <Dropdown
               data={graph.vertices}
