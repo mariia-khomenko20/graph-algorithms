@@ -1,7 +1,7 @@
 import Edge from "./edge";
 import Vertex from "./vertex";
 
-export default function GraphContainer({
+export default function Graph({
   graph = { vertices: [], edges: [] },
   setGraph = () => {},
 }) {

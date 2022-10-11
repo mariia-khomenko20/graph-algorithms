@@ -25,37 +25,37 @@
 }
 
 /* OverlayMenu animation START */
-.overlay-menu-enter {
+.slide-enter {
   left: -100%;
 }
-.overlay-menu-enter-active {
+.slide-enter-active {
   left: 0;
   transition: left 300ms;
 }
-.overlay-menu-exit {
+.slide-exit {
   left: 0;
 }
-.overlay-menu-exit-active {
+.slide-exit-active {
   left: -100%;
   transition: left 300ms;
 }
 /* OverlayMenu animation END */
 
 /* ModalWindow animation START */
-.modal-window-enter {
+.fade-enter {
   opacity: 0;
 }
 
-.modal-window-enter-active {
+.fade-enter-active {
   opacity: 100%;
   transition: opacity 300ms;
 }
 
-.modal-window-exit {
+.fade-exit {
   opacity: 100%;
 }
 
-.modal-window-exit-active {
+.fade-exit-active {
   opacity: 0;
   transition: opacity 300ms;
 }
@@ -63,4 +63,9 @@
 
 input[type="number"]::-webkit-inner-spin-button {
   height: 40px;
+}
+
+label {
+  color: gray;
+  font-weight: 500;
 }

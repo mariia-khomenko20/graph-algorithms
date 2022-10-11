@@ -6,7 +6,7 @@ export default function AdjacencyMatrix({
   setData = () => {},
 }) {
   return (
-    <table className="border-separate border-spacing-2">
+    <table className="h-[320px] border-separate border-spacing-2">
       <thead>
         <tr>
           <th />

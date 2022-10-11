@@ -1,14 +1,6 @@
 import { useEffect, useState } from "react";
 
 export default function useData() {
-  const [verticesAmount, setVerticesAmount] = useState(5);
-  const [matrix, setMatrix] = useState([]);
-  const [graph, setGraph] = useState({ vertices: [], edges: [] });
-  const [delay, setDelay] = useState(1);
-  const [algorithm, setAlgorithm] = useState("kruskal");
-  const [startPrim, setStartPrim] = useState(0);
-  const [onShow, setOnShow] = useState(false);
-
   function EmptyMatrix(size) {
     const newMatrix = [];
     while (newMatrix.length < size) {
@@ -28,6 +20,16 @@ export default function useData() {
     }
     return newMatrix;
   }
+
+  const [verticesAmount, setVerticesAmount] = useState(5);
+  const [matrix, setMatrix] = useState(RandomMatrix(5));
+  const [graph, setGraph] = useState({ vertices: [], edges: [] });
+  const [delay, setDelay] = useState(1);
+  const [algorithm, setAlgorithm] = useState("kruskal");
+  const [start, setStart] = useState(0);
+  const [onShow, setOnShow] = useState(false);
+  const [inSidebar, setInSidebar] = useState(true);
+  const [inModalWindow, setInModalWindow] = useState(false);
 
   function SortEdges(edges) {
     const result = edges.slice();
@@ -115,9 +117,9 @@ export default function useData() {
     setOnShow(true);
     Reset();
     const { vertices, edges } = graph;
-    const start = vertices[startPrim];
-    start.color = "result";
-    start.prim = true;
+    const startVertex = vertices[start];
+    startVertex.color = "result";
+    startVertex.prim = true;
     Show();
     await pause();
     for (let index = 0; index < vertices.length - 1; index++) {
@@ -131,12 +133,14 @@ export default function useData() {
       }
       Show();
       await pause();
-      const { a, b } = min;
-      a.prim = b.prim = true;
-      a.color = b.color = min.color = "result";
-      changeColor("target", null);
-      Show();
-      await pause();
+      if (min) {
+        const { a, b } = min;
+        a.prim = b.prim = true;
+        a.color = b.color = min.color = "result";
+        changeColor("target", null);
+        Show();
+        await pause();
+      }
     }
     setOnShow(false);
   }
@@ -208,9 +212,13 @@ export default function useData() {
     setAlgorithm,
     KruskalsAlgorithm,
     PrimsAlgorithm,
-    startPrim,
-    setStartPrim,
+    start,
+    setStart,
     onShow,
     setOnShow,
+    inSidebar,
+    setInSidebar,
+    inModalWindow,
+    setInModalWindow,
   };
 }

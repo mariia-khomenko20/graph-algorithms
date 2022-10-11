@@ -15,7 +15,7 @@ export default function RadioGroup({
             }}
             checked={radio.value === target}
           />
-          <label>{radio.label}</label>
+          <span>{radio.label}</span>
         </div>
       ))}
     </fieldset>

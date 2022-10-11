@@ -1,14 +1,14 @@
-import { useRef } from "react";
+import { createRef, useRef } from "react";
 import { CSSTransition } from "react-transition-group";
 
-export default function OverlayMenu({ inProp = false, children }) {
+export default function Sidebar({ inProp = false, children }) {
   const nodeRef = useRef(null);
   return (
     <CSSTransition
       nodeRef={nodeRef}
       in={inProp}
       timeout={300}
-      classNames="overlay-menu"
+      classNames="slide"
       unmountOnExit
     >
       <div

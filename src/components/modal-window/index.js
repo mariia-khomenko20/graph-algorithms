@@ -13,7 +13,7 @@ export default function ModalWindow({
       nodeRef={nodeRef}
       in={inProp}
       timeout={300}
-      classNames="modal-window"
+      classNames="fade"
       unmountOnExit
     >
       <div
@@ -23,9 +23,7 @@ export default function ModalWindow({
         <div className="relative flex px-12 py-10 rounded-md bg-white">
           <button
             className="absolute top-1 right-1 flex p-2 rounded-full text-lg text-dark bg-transparent hover:bg-black hover:bg-opacity-5"
-            onClick={() => {
-              setInProp(inProp ? false : true);
-            }}
+            onClick={() => setInProp(false)}
           >
             <IoMdClose />
           </button>
